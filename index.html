@@ -569,6 +569,84 @@
             font-size: 1.1rem;
         }
 
+        .donation-section {
+            background: linear-gradient(135deg, #fef5e7, #fed7aa);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #f59e0b;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .donation-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+
+        .donation-text {
+            color: #a16207;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .wallet-address {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #f59e0b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .wallet-label {
+            display: block;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .wallet-value {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            background: #fef3c7;
+            padding: 12px;
+            border-radius: 8px;
+            word-break: break-all;
+            font-size: 0.9rem;
+            color: #92400e;
+            border: 1px solid #fbbf24;
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-success {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+        }
+
         .pagination-info {
             text-align: center;
             margin-bottom: 20px;
@@ -727,6 +805,29 @@
                 margin-top: 10px;
                 justify-content: center;
             }
+
+            .donation-section {
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .donation-title {
+                font-size: 1.1rem;
+            }
+
+            .wallet-address {
+                padding: 15px;
+            }
+
+            .wallet-value {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+
+            .copy-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -839,6 +940,16 @@
                 <a href="https://github.com/gududefengzhong" target="_blank" class="contact-link">
                     <span class="contact-icon">📁</span> GitHub
                 </a>
+            </div>
+        </div>
+
+        <div class="donation-section">
+            <div class="donation-title">☕ Buy me a coffee</div>
+            <p class="donation-text">If this tool helped you, consider buying me a coffee!</p>
+            <div class="wallet-address">
+                <span class="wallet-label">Solana Address:</span>
+                <div class="wallet-value" id="walletAddress">CpyFhZTuk8thm7UNKWWokDzMGzjt7ZHrrTMxjMi1fm6N</div>
+                <button class="copy-btn" onclick="copyWalletAddress()">📋 Copy</button>
             </div>
         </div>
 
@@ -1353,6 +1464,35 @@
         document.addEventListener('DOMContentLoaded', () => {
             window.feesChecker = new MeteoraFeesChecker();
         });
+
+        function copyWalletAddress() {
+            const walletAddress = 'CpyFhZTuk8thm7UNKWWokDzMGzjt7ZHrrTMxjMi1fm6N';
+            const copyBtn = document.querySelector('.copy-btn');
+
+            navigator.clipboard.writeText(walletAddress).then(() => {
+                // 成功复制的反馈
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = '✅ Copied!';
+                copyBtn.classList.add('copy-success');
+
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.classList.remove('copy-success');
+                }, 2000);
+            }).catch(() => {
+                // 降级方案：选中文本
+                const walletElement = document.getElementById('walletAddress');
+                const range = document.createRange();
+                range.selectNode(walletElement);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+
+                copyBtn.textContent = '📋 Selected';
+                setTimeout(() => {
+                    copyBtn.textContent = '📋 Copy';
+                }, 2000);
+            });
+        }
     </script>
 </body>
 </html>
