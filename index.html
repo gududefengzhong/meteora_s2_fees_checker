@@ -597,68 +597,34 @@
             font-size: 1rem;
         }
 
-        .wallet-address {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            border: 2px solid #f59e0b;
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .wallet-label {
-            display: block;
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .wallet-value {
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            background: #fef3c7;
-            padding: 12px;
-            border-radius: 8px;
-            word-break: break-all;
-            font-size: 0.9rem;
-            color: #92400e;
-            border: 1px solid #fbbf24;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            overflow-wrap: break-word;
-            hyphens: none;
+        .donation-link-container {
             text-align: center;
-            letter-spacing: 0.5px;
-            width: 100%;
-            box-sizing: border-box;
+            margin-top: 20px;
         }
 
-        .copy-btn {
+        .donation-btn {
+            display: inline-block;
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            border: 2px solid #f59e0b;
         }
 
-        .copy-btn:hover {
+        .donation-btn:hover {
             background: linear-gradient(135deg, #d97706, #b45309);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
+            border-color: #d97706;
         }
 
-        .copy-btn:active {
+        .donation-btn:active {
             transform: translateY(0);
-        }
-
-        .copy-success {
-            background: linear-gradient(135deg, #10b981, #059669) !important;
         }
 
         .pagination-info {
@@ -943,36 +909,11 @@
                 font-size: 0.9rem;
             }
 
-            .wallet-address {
-                padding: 15px;
-                border-radius: 15px;
-                box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
-                border: 2px solid #f59e0b;
-                width: 100%;
-                max-width: none;
-                margin: 0;
-            }
-
-            .wallet-value {
-                font-size: 0.75rem;
-                padding: 10px 8px;
-                line-height: 1.6;
-                border-radius: 12px;
-                background: linear-gradient(135deg, #fef3c7, #fde68a);
-                border: 2px solid #f59e0b;
-                box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
-                letter-spacing: 0.3px;
-                width: 100%;
-                box-sizing: border-box;
-                text-align: left;
-            }
-
-            .copy-btn {
-                padding: 10px 18px;
-                font-size: 0.85rem;
+            .donation-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
                 border-radius: 10px;
-                box-shadow: 0 3px 10px rgba(217, 119, 6, 0.3);
-                font-weight: 700;
+                box-shadow: 0 3px 12px rgba(245, 158, 11, 0.3);
             }
 
             .pagination-controls {
@@ -1014,19 +955,10 @@
                 font-size: 1.3rem;
             }
 
-            .wallet-value {
-                font-size: 0.7rem;
-                padding: 8px 6px;
-                word-break: break-all;
-                line-height: 1.5;
-                border-radius: 10px;
-                background: linear-gradient(135deg, #fef3c7, #fed7aa);
-                border: 1.5px solid #f59e0b;
-                box-shadow: 0 1px 6px rgba(245, 158, 11, 0.15);
-                letter-spacing: 0.2px;
-                width: 100%;
-                box-sizing: border-box;
-                text-align: left;
+            .donation-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                border-radius: 8px;
             }
 
             .contact-link {
@@ -1117,10 +1049,12 @@
         <div class="donation-section">
             <div class="donation-title">☕ Buy me a coffee</div>
             <p class="donation-text">If this tool helped you, consider buying me a coffee!</p>
-            <div class="wallet-address">
-                <span class="wallet-label">Solana Address:</span>
-                <div class="wallet-value" id="walletAddress">CpyFhZTuk8thm7UNKWWokDzMGzjt7ZHrrTMxjMi1fm6N</div>
-                <button class="copy-btn" onclick="copyWalletAddress()">📋 Copy</button>
+            <div class="donation-link-container">
+                <a href="https://tiplink.io/blinks/donate?dest=G4FEgdE3yduy8WexqLWda3SGYBTgnydP37GnCcZRJjPR"
+                   target="_blank"
+                   class="donation-btn">
+                    ☕ Donate with TipLink
+                </a>
             </div>
         </div>
 
@@ -1636,34 +1570,7 @@
             window.feesChecker = new MeteoraFeesChecker();
         });
 
-        function copyWalletAddress() {
-            const walletAddress = 'CpyFhZTuk8thm7UNKWWokDzMGzjt7ZHrrTMxjMi1fm6N';
-            const copyBtn = document.querySelector('.copy-btn');
 
-            navigator.clipboard.writeText(walletAddress).then(() => {
-                // 成功复制的反馈
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = '✅ Copied!';
-                copyBtn.classList.add('copy-success');
-
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                    copyBtn.classList.remove('copy-success');
-                }, 2000);
-            }).catch(() => {
-                // 降级方案：选中文本
-                const walletElement = document.getElementById('walletAddress');
-                const range = document.createRange();
-                range.selectNode(walletElement);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(range);
-
-                copyBtn.textContent = '📋 Selected';
-                setTimeout(() => {
-                    copyBtn.textContent = '📋 Copy';
-                }, 2000);
-            });
-        }
     </script>
 </body>
 </html>
